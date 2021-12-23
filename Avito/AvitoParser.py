@@ -16,11 +16,14 @@ class AvitoParser:
         else:
             try:
                 html = requests.get(path)
+                html.raise_for_status()
                 self.__root = BeautifulSoup(html.text, features="html.parser")
             except HTTPError as http_error:
-                print(f"HTTP error occurred: {http_error}")
+                # print(f"HTTP error occurred: {http_error}")
+                raise http_error
             except Exception as error:
-                print(f"Other error occurred: {error}")
+                # print(f"Other error occurred: {error}")
+                raise error
 
     # параметр - css класс, вывод - текст
     def get_css_class(self, attr: str) -> str | None:

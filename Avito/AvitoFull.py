@@ -24,6 +24,6 @@ class AvitoFull(AvitoParser):
             "item-description": self.get_css_class("item-description"),
             "advanced-params": self.get_css_class("advanced-params-param"),
             "link": self.get_link2seller(),
-            "list foto": self.get_image(),
+            "list photo": self.get_image(),
         }
         return res
