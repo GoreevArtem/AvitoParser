@@ -35,14 +35,25 @@ class AvitoParser:
     # получаем url на фото
     def get_image(self) -> List[Any] | None:
         try:
-            return [item["src"] for item in self.__root.find_all('img') if item.has_attr('src')][0:-6]
+            return [item["src"] for item in self.__root.find_all('img') if item.has_attr('alt')][0:-6]
+        except:
+            return None
+
+    # получаем главную картинку, которая представлена в объявлении
+    def get_gallery_img_frame(self) -> str | None:
+        try:
+            return self.__root.find("div", class_="gallery-img-frame js-gallery-img-frame")["data-url"]
         except:
             return None
 
     # получаем ссылку на продавца
     def get_link2seller(self) -> str | None:
         try:
-            return self.__root.find("a", {'title': "Нажмите, чтобы перейти в профиль"})["href"]
+            path = self.__root.find('div', attrs={'class': 'seller-info-name js-seller-info-name'}).findChild("a")["href"]
+            if bool(path.find("https://www.avito.ru")):
+                return "https://www.avito.ru" + path
+            else:
+                return path
         except:
             return None
 
