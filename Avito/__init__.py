@@ -1,4 +1,4 @@
-from .AvitoFull import *
+from .AvitoParserClass import *
 from .CategoriesUrl import *
 NAME = "Avito parser package"
-__all__ = ["AvitoParser", "AvitoFull", "CategoriesUrl"]
+__all__ = ["AvitoBaseClass", "AvitoParserClass", "CategoriesUrl"]

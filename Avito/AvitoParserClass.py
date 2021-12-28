@@ -1,7 +1,7 @@
-from .AvitoParser import *
+from .AvitoBaseClass import *
 
 
-class AvitoFull(AvitoParser):
+class AvitoParserClass(AvitoBaseClass):
     """класс расширение базового класса AvitoParser, красиво все выводит"""
 
     def __init__(self, path: str) -> None:

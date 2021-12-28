@@ -10,11 +10,16 @@ from Avito import *
 # url = "https://www.avito.ru/nizhniy_novgorod/audio_i_video/tv_box_ugoos_x4_4k_android_11_podgotovka_2223460371"
 # url = "https://www.avito.ru/nizhniy_novgorod/audio_i_video/domashniy_kinoteatr_lg_2303171616"
 # url = "https://www.avito.ru/nizhniy_novgorod/audio_i_video/videoproigryvatel_samsung_1913284325"
-
+# url = 'https://www.avito.ru/nizhniy_novgorod/noutbuki/apple_macbook_pro_13_2019_2287457227'
 # url = "https://www.avito.ru/nizhniy_novgorod/audio_i_video/cd_mihail_shufutinskiy._dobryy_vecher_gospoda_2294437993"
+# url = "https://www.avito.ru/nizhniy_novgorod/noutbuki/igrovoy_17.3_acer_nitro_c_rtx_3060_na_6_yadrah_2251145752"
+# url = "https://www.avito.ru/nizhniy_novgorod/noutbuki/noutbuk_lenovo-g580-model_n_20150_1954197157"
+# url = "https://www.avito.ru/nizhniy_novgorod/planshety_i_elektronnye_knigi/ipad_2019_128gb_2314845379"
+# url = "https://www.avito.ru/nizhniy_novgorod/tovary_dlya_kompyutera/rtx_3080ti_gainward_2281496631"
 
-url = 'https://www.avito.ru/nizhniy_novgorod/noutbuki/apple_macbook_pro_13_2019_2287457227'
-outputdata = AvitoFull(url).get_full_info()
+url = "https://www.avito.ru/nizhniy_novgorod/tovary_dlya_kompyutera/videokarta_palit_9600gt_2267328427"
+
+outputdata = AvitoParserClass(path=url).get_full_info()
 print(outputdata)
 
 '''url = "https://www.avito.ru/nizhniy_novgorod/noutbuki"

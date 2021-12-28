@@ -5,9 +5,10 @@ import requests
 from requests.exceptions import HTTPError
 from bs4 import BeautifulSoup
 import validators
+from fake_useragent import UserAgent
 
 
-class AvitoParser:
+class AvitoBaseClass:
     "базовый класс парсера авито"
 
     def __init__(self, path: str) -> None:
@@ -15,7 +16,7 @@ class AvitoParser:
             raise ValueError("incorrect url input")
         else:
             try:
-                html = requests.get(path)
+                html = requests.get(path, headers={'User-Agent': UserAgent().chrome})
                 html.raise_for_status()
                 self.__root = BeautifulSoup(html.text, features="html.parser")
             except HTTPError as http_error:
@@ -28,7 +29,7 @@ class AvitoParser:
     # параметр - css класс, вывод - текст
     def get_css_class(self, attr: str) -> str | None:
         try:
-            return re.sub("^\s+|\n|\r|\s+$", '', self.__root.find(class_=attr).text).replace(u'\xa0', u'')
+            return re.sub("^\s+|\n|\r|\s+$", '', self.__root.find(class_=attr).text).replace(u'\xa0', u'').replace("\t", " ")
         except:
             return None
 
@@ -49,7 +50,8 @@ class AvitoParser:
     # получаем ссылку на продавца
     def get_link2seller(self) -> str | None:
         try:
-            path = self.__root.find('div', attrs={'class': 'seller-info-name js-seller-info-name'}).findChild("a")["href"]
+            path = self.__root.find('div', attrs={'class': 'seller-info-name js-seller-info-name'}).findChild("a")[
+                "href"]
             if bool(path.find("https://www.avito.ru")):
                 return "https://www.avito.ru" + path
             else:
