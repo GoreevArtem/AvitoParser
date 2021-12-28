@@ -35,10 +35,10 @@ class CategoriesUrl:
                 url = self.path + "?p=" + str(page)
                 response = requests.get(url, headers={'User-Agent': UserAgent().chrome})
                 print(f'[PAGE] {url}')
-                code = BeautifulSoup(response.content, features="html.parser")
+                code = BeautifulSoup(response.text, features="html.parser")
 
                 sheets[page] = ["https://www.avito.ru" + item["href"] for item in
-                                code.find_all("a", {'data-marker': "item-title"})]
+                                code.find_all("a", {'itemprop': "url"})]
 
                 if page == pages:
                     break
